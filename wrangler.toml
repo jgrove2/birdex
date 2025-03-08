@@ -4,3 +4,7 @@ compatibility_date = "2025-03-08"
 compatibility_flags = ["nodejs_compat"]
 
 pages_build_output_dir = ".vercel/output/static"
+
+[[r2_bucket]]
+binding = "MEDIA"
+bucket_name = "birdex-media"
