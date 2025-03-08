@@ -12,6 +12,8 @@
     "deploy": "npm run pages:build && wrangler pages deploy"
   },
   "dependencies": {
+    "framer-motion": "^12.4.10",
+    "motion": "^12.4.10",
     "next": "15.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

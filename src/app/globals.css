@@ -1,6 +1,10 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --text: #2F3645;
+  --text-click: #555c6b;
+  --primary: #F8EFD1;
+  --secondary: #1C4D1A;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -15,19 +19,10 @@
   }
 }
 
-@media(max-width: 480px) {
-
-}
-
-@media(min-width: 481px) and (max-width: 768px) {
-
-}
-
-@media(min-width: 769px){
+@media(min-width: 1100px){
 .inner-container {
-    width: 768px;
-    position: fixed;
-    left: calc(100vw /2 - 384px);
+    width: 1100px !important;
+    left: calc(100vw /2 - 550px);
   }
 }
 
@@ -50,4 +45,6 @@ body {
 .inner-container {
   background-color: var(--foreground);
   height: 100%;
+  position: fixed;
+  width: 100%;
 }
