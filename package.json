@@ -12,9 +12,11 @@
     "deploy": "npm run pages:build && wrangler pages deploy"
   },
   "dependencies": {
+    "aws-sdk": "^2.1692.0",
     "framer-motion": "^12.4.10",
     "motion": "^12.4.10",
     "next": "15.1",
+    "node-cloudflare-r2": "^0.4.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
