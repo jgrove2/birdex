@@ -1,6 +1,8 @@
+import styles from "./icons.module.css";
 export default function HomeIcon() {
   return (
     <svg
+      className={styles.svgIcon}
       xmlns="http://www.w3.org/2000/svg"
       width={800}
       height={800}

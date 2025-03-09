@@ -31,7 +31,7 @@
         align-items: center;
         justify-content: center;
         z-index: 1;
-        svg {
+        .cameraSvg {
             z-index: 3;
             width: 3rem;
             height: 3rem;
@@ -44,11 +44,6 @@
             transform: translateY(12px);
             position:fixed
         }
-    }
-    svg {
-        z-index: 3;
-        width: 2rem;
-        height: 2rem;
     }
 }
 
@@ -67,10 +62,6 @@
     gap: 0.5rem;
     align-items: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    svg {
-        width: 2.5rem;
-        height: 2rem;
-    }
     .popupMenuButton {
         background-color: transparent;
         border: none;

@@ -21,7 +21,7 @@ export default function NavigationMenu() {
           className={styles.navigationMenuButton}
           onClick={() => router.push("/")}
         >
-          <HomeIcon />
+          <HomeIcon className={styles.svg} />
         </motion.button>
         <div></div>
         <motion.button
@@ -29,14 +29,18 @@ export default function NavigationMenu() {
           className={styles.navigationMenuButton}
           onClick={() => router.push("/profile")}
         >
-          <PersonIcon />
+          <PersonIcon className={styles.svg} />
         </motion.button>
         <motion.button
           className={styles.cameraIcon + " " + styles.navigationMenuButton}
           onClick={() => setIsPopupMenuOpen(!isPopupMenuOpen)}
         >
           <div className={styles.cameraIconBorder}></div>
-          {isPopupMenuOpen ? <CloseIcon /> : <CameraIcon />}
+          {isPopupMenuOpen ? (
+            <CloseIcon isNavigationBar={true} />
+          ) : (
+            <CameraIcon isNavigationBar={true} />
+          )}
         </motion.button>
       </div>
       <AnimatePresence initial={false}>
@@ -52,13 +56,13 @@ export default function NavigationMenu() {
               className={styles.popupMenuButton}
               whileTap={{ scale: 0.85 }}
             >
-              <CameraIcon />
+              <CameraIcon className={styles.svg} />
             </motion.button>
             <motion.button
               className={styles.popupMenuButton}
               whileTap={{ scale: 0.85 }}
             >
-              <PhotosIcon />
+              <PhotosIcon className={styles.svg} />
             </motion.button>
           </motion.div>
         ) : null}

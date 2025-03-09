@@ -1,13 +1,18 @@
-import Image from "next/image";
-import cameraIcon from "@/../public/camera.svg";
+import styles from "./icons.module.css";
 
-export default function CameraIcon() {
+export default function CameraIcon({
+  props,
+}: {
+  props: { isNavigationBar: boolean };
+}) {
+  const isNavigationBar = props?.isNavigationBar ?? false;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={800}
       height={800}
       viewBox="0 -2 32 32"
+      className={isNavigationBar ? styles.svgIcon : styles.cameraSvg}
     >
       <title>{"camera"}</title>
       <path
