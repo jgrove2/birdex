@@ -1,14 +1,7 @@
 import type { Metadata } from "next";
 import NavigationMenu from "@/components/navigationMenu";
 import bgImage from "@/../public/birdSketch.jpg";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -25,10 +18,6 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body style={{ backgroundImage: `url(${bgImage.src})` }}>
-          <SignedOut>
-            <SignInButton />
-            <SignUpButton />
-          </SignedOut>
           <div role="region" className="inner-container">
             {children}
             <NavigationMenu />

@@ -19,14 +19,15 @@ export default function Home() {
       setUserIdentifier(user.firstName);
     }
   }, [user]);
+  // eslint-disable
   useEffect(() => {
     function setScrollPosition() {
-      let containerPosition = containerRef.current?.getBoundingClientRect();
-      let positions = targetRef.current?.getBoundingClientRect();
+      const containerPosition = containerRef.current?.getBoundingClientRect();
+      const positions = targetRef.current?.getBoundingClientRect();
       if (
         positions &&
         containerPosition &&
-        positions.top <= 0.1 * containerPosition.bottom
+        positions.top <= 0.15 * containerPosition.bottom
       ) {
         setScrollState("scroll");
       } else {
@@ -43,11 +44,23 @@ export default function Home() {
       containerRef.current.addEventListener("scroll", setScrollPosition);
     }
     return () => {
-      if (targetRef && targetRef.current) {
+      // eslint-disable-next-line
+      if (
+        targetRef &&
+        targetRef.current &&
+        containerRef.current &&
+        containerRef
+      ) {
+        // eslint-disable-next-line
         targetRef.current.removeEventListener("scroll", setScrollPosition);
-        targetRef.current.removeEventListener("touchmove", setScrollPosition);
+        // eslint-disable-next-line
+        containerRef.current.removeEventListener(
+          "touchmove",
+          setScrollPosition
+        );
       }
     };
+    // eslint-disable-next-line
   }, [targetRef.current]);
 
   return (

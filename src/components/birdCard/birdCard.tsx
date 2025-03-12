@@ -22,9 +22,7 @@ export default function BirdCard({ birdId, birdName, enabled }: BirdCardProps) {
             : styles.bird_card_image_hidden
         }
       />
-      {/* <div className={styles.bird_id}>
-        {enabled ? <span>{birdName}</span> : <span>{birdId}</span>}
-      </div> */}
+      <div>{enabled ? <span>{birdName}</span> : <span>{birdId}</span>}</div>
     </div>
   );
 }
