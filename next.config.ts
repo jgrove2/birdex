@@ -6,8 +6,7 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname:
-          "birdex-media.f06e4d17eec60c4d277fb35f162506ad.r2.cloudflarestorage.com",
+        hostname: "pub-29783ce41c054781b345beb31842faad.r2.dev",
       },
     ],
   },

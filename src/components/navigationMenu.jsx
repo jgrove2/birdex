@@ -7,6 +7,7 @@ import PhotosIcon from "./icons/photos";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 import styles from "./navigationMenu.module.css";
 
@@ -16,32 +17,37 @@ export default function NavigationMenu() {
   return (
     <>
       <div className={styles.navigationMenu}>
-        <motion.button
-          whileTap={{ scale: 0.85 }}
-          className={styles.navigationMenuButton}
-          onClick={() => router.push("/")}
-        >
-          <HomeIcon className={styles.svg} />
-        </motion.button>
-        <div></div>
-        <motion.button
-          whileTap={{ scale: 0.85 }}
-          className={styles.navigationMenuButton}
-          onClick={() => router.push("/profile")}
-        >
-          <PersonIcon className={styles.svg} />
-        </motion.button>
-        <motion.button
-          className={styles.cameraIcon + " " + styles.navigationMenuButton}
-          onClick={() => setIsPopupMenuOpen(!isPopupMenuOpen)}
-        >
-          <div className={styles.cameraIconBorder}></div>
-          {isPopupMenuOpen ? (
-            <CloseIcon isNavigationBar={true} />
-          ) : (
-            <CameraIcon isNavigationBar={true} />
-          )}
-        </motion.button>
+        <SignedOut>
+          <SignInButton className={styles.signInButton} />
+        </SignedOut>
+        <SignedIn>
+          <motion.button
+            whileTap={{ scale: 0.85 }}
+            className={styles.navigationMenuButton}
+            onClick={() => router.push("/")}
+          >
+            <HomeIcon className={styles.svg} />
+          </motion.button>
+          <div></div>
+          <motion.button
+            whileTap={{ scale: 0.85 }}
+            className={styles.navigationMenuButton}
+            onClick={() => router.push("/profile")}
+          >
+            <PersonIcon className={styles.svg} />
+          </motion.button>
+          <motion.button
+            className={styles.cameraIcon + " " + styles.navigationMenuButton}
+            onClick={() => setIsPopupMenuOpen(!isPopupMenuOpen)}
+          >
+            <div className={styles.cameraIconBorder}></div>
+            {isPopupMenuOpen ? (
+              <CloseIcon isNavigationBar={true} />
+            ) : (
+              <CameraIcon isNavigationBar={true} />
+            )}
+          </motion.button>
+        </SignedIn>
       </div>
       <AnimatePresence initial={false}>
         {isPopupMenuOpen ? (

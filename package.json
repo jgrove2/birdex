@@ -12,6 +12,7 @@
     "deploy": "npm run pages:build && wrangler pages deploy"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.12.4",
     "aws-sdk": "^2.1692.0",
     "framer-motion": "^12.4.10",
     "motion": "^12.4.10",

@@ -7,6 +7,14 @@
     border-top: 2px solid var(--secondary);
     justify-content: space-around;
     padding: 0.5rem 0;
+    z-index: 2;
+    .signInButton {
+        background-color: var(--secondary);
+        border: none;
+        border-radius: 5%;
+        font-weight: 600;
+        height: 2rem;
+    }
     .navigationMenuButton {
         background-color: transparent;
         border: none;
