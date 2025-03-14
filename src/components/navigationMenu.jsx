@@ -16,11 +16,8 @@ export default function NavigationMenu() {
   const router = useRouter();
   return (
     <>
-      <div className={styles.navigationMenu}>
-        <SignedOut>
-          <SignInButton className={styles.signInButton} />
-        </SignedOut>
-        <SignedIn>
+      <SignedIn>
+        <div className={styles.navigationMenu}>
           <motion.button
             whileTap={{ scale: 0.85 }}
             className={styles.navigationMenuButton}
@@ -47,8 +44,8 @@ export default function NavigationMenu() {
               <CameraIcon isNavigationBar={true} />
             )}
           </motion.button>
-        </SignedIn>
-      </div>
+        </div>
+      </SignedIn>
       <AnimatePresence initial={false}>
         {isPopupMenuOpen ? (
           <motion.div

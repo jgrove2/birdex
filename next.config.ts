@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
       {
         hostname: "pub-29783ce41c054781b345beb31842faad.r2.dev",
       },
+      {
+        hostname: "img.clerk.com",
+      },
     ],
   },
 };

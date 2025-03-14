@@ -1,8 +1,15 @@
 import type { Metadata } from "next";
 import NavigationMenu from "@/components/navigationMenu";
 import bgImage from "@/../public/birdSketch.jpg";
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkProvider, SignedIn } from "@clerk/nextjs";
 import "./globals.css";
+import { Inter, Comfortaa } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
+const comfortaa = Comfortaa({
+  subsets: ["latin"],
+  variable: "--font-comfortaa",
+});
 
 export const metadata: Metadata = {
   title: "Birdex",
@@ -16,11 +23,13 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" className={`${inter.className} ${comfortaa.variable}`}>
         <body style={{ backgroundImage: `url(${bgImage.src})` }}>
           <div role="region" className="inner-container">
             {children}
-            <NavigationMenu />
+            <SignedIn>
+              <NavigationMenu />
+            </SignedIn>
           </div>
         </body>
       </html>

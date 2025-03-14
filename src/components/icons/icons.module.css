@@ -16,3 +16,8 @@
         color: var(--text-click);
     }
 }
+
+.dragHandleSvg {
+    width: 5vw;
+    height: auto;
+}

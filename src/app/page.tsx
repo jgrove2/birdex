@@ -7,13 +7,15 @@ export const runtime = "edge";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { useUser } from "@clerk/nextjs";
+import { DragHandle } from "@/components/icons/dragHandle";
+import { redirect } from "next/navigation";
 
 export default function Home() {
   const [scrollState, setScrollState] = useState<"hidden" | "scroll">("hidden");
   const [userIdentifier, setUserIdentifier] = useState<string | null>(null);
   const targetRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { user } = useUser();
+  const { user, isSignedIn } = useUser();
   useEffect(() => {
     if (user) {
       setUserIdentifier(user.firstName);
@@ -63,6 +65,10 @@ export default function Home() {
     // eslint-disable-next-line
   }, [targetRef.current]);
 
+  if (!isSignedIn) {
+    redirect("/login");
+  }
+
   return (
     <motion.div className={styles.home_container} ref={containerRef}>
       <div className={styles.image_container}>
@@ -81,6 +87,9 @@ export default function Home() {
         />
       </div>
       <motion.div className={styles.content_container} ref={targetRef}>
+        <div className={styles.drag_handle_container}>
+          <DragHandle />
+        </div>
         <motion.div
           className={styles.grid_wrapper}
           style={{

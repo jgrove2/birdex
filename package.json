@@ -9,15 +9,26 @@
     "lint": "next lint",
     "pages:build": "npx @cloudflare/next-on-pages",
     "preview": "npm run pages:build && wrangler pages dev",
-    "deploy": "npm run pages:build && wrangler pages deploy"
+    "deploy": "npm run pages:build && wrangler pages deploy",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
+    "@auth/d1-adapter": "^1.8.0",
     "@clerk/nextjs": "^6.12.4",
+    "@cloudflare/workers-types": "^4.20250313.0",
+    "@supabase/supabase-js": "^2.49.1",
     "aws-sdk": "^2.1692.0",
+    "dayjs": "^1.11.13",
+    "drizzle-kit": "^0.30.5",
+    "drizzle-orm": "^0.40.0",
     "framer-motion": "^12.4.10",
+    "jwt-decode": "^4.0.0",
     "motion": "^12.4.10",
     "next": "15.1",
     "node-cloudflare-r2": "^0.4.2",
+    "pg": "^8.14.0",
+    "postgres": "^3.4.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
