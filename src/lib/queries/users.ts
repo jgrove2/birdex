@@ -1,6 +1,6 @@
 import database from "@/database";
-import { usersTable } from "@/database/schema";
-import { eq } from "drizzle-orm";
+import { usersTable, followingTable } from "@/database/schema";
+import { eq, ilike, and } from "drizzle-orm";
 
 export const getUserByClerkId = async (userId: string) => {
   const user = await database
@@ -45,4 +45,24 @@ export const updateUserDetails = async (
     .set(userDetails)
     .where(eq(usersTable.clerk_id, userId));
   return user;
+};
+
+export const getUsersByUserName = async (userName: string, userId: number) => {
+  const users = await database
+    .select({
+      id: usersTable.id,
+      user_name: usersTable.user_name,
+      profile_picture: usersTable.profile_picture,
+      following: followingTable.following_id,
+    })
+    .from(usersTable)
+    .leftJoin(
+      followingTable,
+      and(
+        eq(usersTable.id, userId),
+        eq(usersTable.id, followingTable.following_id)
+      )
+    )
+    .where(ilike(usersTable.user_name, `%${userName}%`));
+  return users;
 };

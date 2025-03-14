@@ -3,6 +3,7 @@ import HomeIcon from "./icons/home";
 import CameraIcon from "./icons/camera";
 import PersonIcon from "./icons/person";
 import CloseIcon from "./icons/close";
+import CameraPopupIcon from "./icons/cameraPopup";
 import PhotosIcon from "./icons/photos";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
@@ -39,9 +40,9 @@ export default function NavigationMenu() {
           >
             <div className={styles.cameraIconBorder}></div>
             {isPopupMenuOpen ? (
-              <CloseIcon isNavigationBar={true} />
+              <CloseIcon isNavigationBar={false} />
             ) : (
-              <CameraIcon isNavigationBar={true} />
+              <CameraIcon isNavigationBar={false} />
             )}
           </motion.button>
         </div>
@@ -59,7 +60,7 @@ export default function NavigationMenu() {
               className={styles.popupMenuButton}
               whileTap={{ scale: 0.85 }}
             >
-              <CameraIcon className={styles.svg} />
+              <CameraPopupIcon className={styles.svg} />
             </motion.button>
             <motion.button
               className={styles.popupMenuButton}

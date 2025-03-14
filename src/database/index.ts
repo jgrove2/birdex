@@ -7,6 +7,6 @@ import * as schema from "./schema";
 const client = postgres(process.env.DATABASE_URL!);
 
 // Create and export the database instance
-const database = drizzle(client, { schema, logger: true });
+const database = drizzle(client, { schema, logger: false });
 
 export default database;

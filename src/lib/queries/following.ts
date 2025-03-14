@@ -4,20 +4,30 @@ import { and, eq } from "drizzle-orm";
 
 export const getFollowing = async (userId: number) => {
   const following = await database
-    .select()
+    .select({
+      id: usersTable.id,
+      user_name: usersTable.user_name,
+      profile_picture: usersTable.profile_picture,
+      following: followingTable.following_id,
+    })
     .from(followingTable)
-    .leftJoin(usersTable, eq(followingTable.user_id, usersTable.id))
-    .where(eq(followingTable.following_id, userId));
+    .leftJoin(usersTable, eq(followingTable.following_id, usersTable.id))
+    .where(eq(followingTable.user_id, userId));
   return following;
 };
 
 export const getFollowers = async (userId: number) => {
-  const followers = await database
-    .select()
+  const following = await database
+    .select({
+      id: usersTable.id,
+      user_name: usersTable.user_name,
+      profile_picture: usersTable.profile_picture,
+      following: followingTable.following_id,
+    })
     .from(followingTable)
-    .leftJoin(usersTable, eq(followingTable.following_id, usersTable.id))
-    .where(eq(followingTable.user_id, userId));
-  return followers;
+    .leftJoin(usersTable, eq(followingTable.user_id, usersTable.id))
+    .where(eq(followingTable.following_id, userId));
+  return following;
 };
 
 export const followUser = async (userId: number, followingId: number) => {

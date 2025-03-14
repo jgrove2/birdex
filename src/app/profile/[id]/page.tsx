@@ -4,6 +4,8 @@ import styles from "../profile.module.css";
 import { getUserByIdAction } from "@/lib/actions/users";
 import ServerProfileBlurb from "@/components/profile/serverProfileBlurb";
 import ServerNumberCard from "@/components/profile/serverCard";
+import { Dialog } from "@/components/dialog";
+
 export default async function Profile({
   params,
 }: {
@@ -16,6 +18,7 @@ export default async function Profile({
   }
   return (
     <div className={styles.profile_container}>
+      <Dialog redirect={`/profile/${id}`} searchToggle={false} />
       <div className={styles.profile_header}>
         <div className={"profile_header_content"}>
           <div className={"profile_header_content_main_container"}>
@@ -43,16 +46,19 @@ export default async function Profile({
                   userId={user.id}
                   label={"Followers"}
                   key="followers"
+                  href={`/profile/${id}?showDialog=y&type=followers`}
                 />
                 <ServerNumberCard
                   userId={user.id}
                   label={"Following"}
                   key="following"
+                  href={`/profile/${id}?showDialog=y&type=following`}
                 />
                 <ServerNumberCard
                   userId={user.id}
                   label={"Birds"}
                   key="birds"
+                  href={`/profile/${id}?showDialog=y&type=birds`}
                 />
               </div>
             </div>

@@ -7,8 +7,8 @@ import {
 } from "../queries/following";
 
 export const followAction = async (userId: number, followingId: number) => {
-  const following = await followUser(userId, followingId);
-  return following;
+  "use action";
+  followUser(userId, followingId);
 };
 
 export const unfollowAction = async (userId: number, followingId: number) => {

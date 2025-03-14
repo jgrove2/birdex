@@ -4,7 +4,7 @@ import bgImage from "@/../public/birdSketch.jpg";
 import { ClerkProvider, SignedIn } from "@clerk/nextjs";
 import "./globals.css";
 import { Inter, Comfortaa } from "next/font/google";
-
+import { TanstackProvider } from "@/components/providers/tanstackProvider";
 const inter = Inter({ subsets: ["latin"] });
 const comfortaa = Comfortaa({
   subsets: ["latin"],
@@ -23,16 +23,18 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en" className={`${inter.className} ${comfortaa.variable}`}>
-        <body style={{ backgroundImage: `url(${bgImage.src})` }}>
-          <div role="region" className="inner-container">
-            {children}
-            <SignedIn>
-              <NavigationMenu />
-            </SignedIn>
-          </div>
-        </body>
-      </html>
+      <TanstackProvider>
+        <html lang="en" className={`${inter.className} ${comfortaa.variable}`}>
+          <body style={{ backgroundImage: `url(${bgImage.src})` }}>
+            <div role="region" className="inner-container">
+              {children}
+              <SignedIn>
+                <NavigationMenu />
+              </SignedIn>
+            </div>
+          </body>
+        </html>
+      </TanstackProvider>
     </ClerkProvider>
   );
 }

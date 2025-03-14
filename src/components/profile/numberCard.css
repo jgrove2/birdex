@@ -9,6 +9,7 @@
     width: 5rem;
     border: none;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .number_card_number {

@@ -69,6 +69,7 @@
     justify-content: space-around;
     gap: 0.5rem;
     align-items: center;
+    z-index: 5;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     .popupMenuButton {
         background-color: transparent;

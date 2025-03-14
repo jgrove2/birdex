@@ -1,18 +1,40 @@
 "use client";
-import { JSX, useEffect, useRef } from "react";
-import { useSearchParams } from "next/navigation";
+import { JSX, useEffect, useRef, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import "./dialog.css";
+import { FollowingModal } from "./profile/socialModal/socialModal";
+import { FollowersModal } from "./profile/socialModal/socialModal";
+import { useUser } from "@clerk/nextjs";
 
 export function Dialog({
-  children,
-  closeDialog,
+  redirect,
+  searchToggle,
 }: {
-  children: React.ReactNode;
-  closeDialog: () => void;
+  redirect: string;
+  searchToggle: boolean;
 }) {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const showDialog = searchParams.get("showDialog");
+  const type = searchParams.get("type");
+  const { isSignedIn, user } = useUser();
+  const [userData, setUserData] = useState({
+    blurb: "",
+    id: -1,
+  });
+  useEffect(() => {
+    const fetchBlurb = async () => {
+      if (!user) return;
+      const response = await fetch(`/api/users?userId=${user.id}`);
+      const data = await response.json();
+      setUserData(data);
+    };
+
+    if (isSignedIn && user) {
+      fetchBlurb();
+    }
+  }, [user, isSignedIn]);
 
   useEffect(() => {
     if (showDialog === "y") {
@@ -24,7 +46,7 @@ export function Dialog({
   }, [showDialog]);
 
   const handleClose = () => {
-    closeDialog();
+    router.push(redirect);
     dialogRef.current?.close();
   };
 
@@ -34,7 +56,11 @@ export function Dialog({
         <button className="close_button" onClick={handleClose}>
           ×
         </button>
-        {children}
+        {type === "followers" ? (
+          <FollowersModal userId={userData.id} />
+        ) : (
+          <FollowingModal searchToggle={searchToggle} userId={userData.id} />
+        )}
       </dialog>
     ) : null;
 
