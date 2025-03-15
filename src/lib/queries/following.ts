@@ -1,17 +1,17 @@
-import database from "@/database";
-import { followingTable, usersTable } from "@/database/schema";
+import { database } from "@/database";
+import { followingTable, profileTable } from "@/database/schema";
 import { and, eq } from "drizzle-orm";
 
 export const getFollowing = async (userId: number) => {
   const following = await database
     .select({
-      id: usersTable.id,
-      user_name: usersTable.user_name,
-      profile_picture: usersTable.profile_picture,
+      id: profileTable.id,
+      user_name: profileTable.user_name,
+      profile_picture: profileTable.profile_picture,
       following: followingTable.following_id,
     })
     .from(followingTable)
-    .leftJoin(usersTable, eq(followingTable.following_id, usersTable.id))
+    .leftJoin(profileTable, eq(followingTable.following_id, profileTable.id))
     .where(eq(followingTable.user_id, userId));
   return following;
 };
@@ -19,13 +19,13 @@ export const getFollowing = async (userId: number) => {
 export const getFollowers = async (userId: number) => {
   const following = await database
     .select({
-      id: usersTable.id,
-      user_name: usersTable.user_name,
-      profile_picture: usersTable.profile_picture,
+      id: profileTable.id,
+      user_name: profileTable.user_name,
+      profile_picture: profileTable.profile_picture,
       following: followingTable.following_id,
     })
     .from(followingTable)
-    .leftJoin(usersTable, eq(followingTable.user_id, usersTable.id))
+    .leftJoin(profileTable, eq(followingTable.user_id, profileTable.id))
     .where(eq(followingTable.following_id, userId));
   return following;
 };

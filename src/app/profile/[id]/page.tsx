@@ -5,6 +5,7 @@ import { getUserByIdAction } from "@/lib/actions/users";
 import ServerProfileBlurb from "@/components/profile/serverProfileBlurb";
 import ServerNumberCard from "@/components/profile/serverCard";
 import { Dialog } from "@/components/dialog";
+export const runtime = "edge";
 
 export default async function Profile({
   params,

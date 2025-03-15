@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
 import NavigationMenu from "@/components/navigationMenu";
 import bgImage from "@/../public/birdSketch.jpg";
-import { ClerkProvider, SignedIn } from "@clerk/nextjs";
 import "./globals.css";
 import { Inter, Comfortaa } from "next/font/google";
 import { TanstackProvider } from "@/components/providers/tanstackProvider";
+import {
+  ClerkProvider,
+  RedirectToSignIn,
+  SignedIn,
+  SignedOut,
+} from "@clerk/nextjs";
 const inter = Inter({ subsets: ["latin"] });
 const comfortaa = Comfortaa({
   subsets: ["latin"],
@@ -16,7 +21,7 @@ export const metadata: Metadata = {
   description: "Birdex is a platform for cataloging bird sightings",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -25,14 +30,17 @@ export default function RootLayout({
     <ClerkProvider>
       <TanstackProvider>
         <html lang="en" className={`${inter.className} ${comfortaa.variable}`}>
-          <body style={{ backgroundImage: `url(${bgImage.src})` }}>
-            <div role="region" className="inner-container">
-              {children}
-              <SignedIn>
+          <SignedIn>
+            <body style={{ backgroundImage: `url(${bgImage.src})` }}>
+              <div role="region" className="inner-container">
+                {children}
                 <NavigationMenu />
-              </SignedIn>
-            </div>
-          </body>
+              </div>
+            </body>
+          </SignedIn>
+          <SignedOut>
+            <RedirectToSignIn />
+          </SignedOut>
         </html>
       </TanstackProvider>
     </ClerkProvider>

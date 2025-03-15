@@ -11,10 +11,12 @@
     "preview": "npm run pages:build && wrangler pages dev",
     "deploy": "npm run pages:build && wrangler pages deploy",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate"
+    "db:migrate:local": "wrangler d1 migrations apply birdex-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply birdex-db --remote"
   },
   "dependencies": {
     "@auth/d1-adapter": "^1.8.0",
+    "@auth/drizzle-adapter": "^1.8.0",
     "@clerk/nextjs": "^6.12.4",
     "@cloudflare/workers-types": "^4.20250313.0",
     "@supabase/supabase-js": "^2.49.1",
@@ -27,6 +29,7 @@
     "jwt-decode": "^4.0.0",
     "motion": "^12.4.10",
     "next": "15.1",
+    "next-auth": "^4.24.11",
     "node-cloudflare-r2": "^0.4.2",
     "pg": "^8.14.0",
     "postgres": "^3.4.5",
@@ -45,6 +48,6 @@
     "eslint": "^9",
     "eslint-config-next": "15.2.1",
     "typescript": "^5",
-    "wrangler": "^3.114.0"
+    "wrangler": "^3.28.0"
   }
 }

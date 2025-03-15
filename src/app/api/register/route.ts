@@ -1,5 +1,6 @@
 import { createUser, getUserByClerkId } from "@/lib/queries/users";
 import { NextResponse } from "next/server";
+export const runtime = "edge";
 
 export async function POST(request: Request) {
   const { userId, userName, profilePicture } = await request.json();

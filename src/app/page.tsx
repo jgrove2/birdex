@@ -6,22 +6,13 @@ import Image from "next/image";
 export const runtime = "edge";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
-import { useUser } from "@clerk/nextjs";
 import { DragHandle } from "@/components/icons/dragHandle";
-import { redirect } from "next/navigation";
-
+import { useUser } from "@clerk/nextjs";
 export default function Home() {
+  const { user } = useUser();
   const [scrollState, setScrollState] = useState<"hidden" | "scroll">("hidden");
-  const [userIdentifier, setUserIdentifier] = useState<string | null>(null);
   const targetRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { user, isSignedIn } = useUser();
-  useEffect(() => {
-    if (user) {
-      setUserIdentifier(user.firstName);
-    }
-  }, [user]);
-  // eslint-disable
   useEffect(() => {
     function setScrollPosition() {
       const containerPosition = containerRef.current?.getBoundingClientRect();
@@ -65,16 +56,12 @@ export default function Home() {
     // eslint-disable-next-line
   }, [targetRef.current]);
 
-  if (!isSignedIn) {
-    redirect("/login");
-  }
-
   return (
     <motion.div className={styles.home_container} ref={containerRef}>
       <div className={styles.image_container}>
         {scrollState === "hidden" && (
           <h1 className={"welcome_text"}>
-            {userIdentifier ? `Hello, ${userIdentifier}` : "Hello"}
+            {user?.firstName ? `Hello, ${user.firstName}` : "Hello"}
           </h1>
         )}
         <Image

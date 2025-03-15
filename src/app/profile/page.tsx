@@ -2,8 +2,6 @@
 export const runtime = "edge";
 import "./profile.css";
 import Image from "next/image";
-import { SignOutButton, useUser } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
 import styles from "./profile.module.css";
 import ProfileBlurb from "@/components/profile/profileBlurb";
 import NumberCard from "@/components/profile/numberCard";
@@ -13,9 +11,10 @@ import { useRouter } from "next/navigation";
 import { useUserData } from "@/hooks/useUserData";
 import { useFollowers } from "@/hooks/useFollowers";
 import { useFollowing } from "@/hooks/useFollowing";
+import { useUser } from "@clerk/nextjs";
 
 export default function Profile() {
-  const { isSignedIn, user, isLoaded } = useUser();
+  const { user, isLoaded } = useUser();
   const router = useRouter();
 
   const {
@@ -62,10 +61,7 @@ export default function Profile() {
     router.push("/profile?showDialog=y&type=following");
   };
 
-  if (!isSignedIn) {
-    if (!isLoaded) return null;
-    redirect("/");
-  }
+  if (!isLoaded) return null;
 
   return (
     <div className={styles.profile_container}>
@@ -81,19 +77,17 @@ export default function Profile() {
                   }
                 >
                   <Image
-                    src={user.imageUrl}
+                    src={user?.imageUrl ?? ""}
                     alt={"Profile Picture"}
                     width={800}
                     height={800}
                     className={"profile_header_content_image"}
                   />
-                  <SignOutButton>
-                    <button className={"sign_out_button"}>Sign Out</button>
-                  </SignOutButton>
+                  <button className={"sign_out_button"}>Sign Out</button>
                 </div>
                 <div className={"profile_header_content_text"}>
                   <span className={styles.profile_header_content_text_name}>
-                    {user.fullName}
+                    {user?.fullName}
                     <span className={styles.profile_user_id}>
                       #{userData?.id}
                     </span>

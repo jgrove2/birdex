@@ -1,6 +1,6 @@
 import { unfollowUser } from "@/lib/queries/following";
 import { NextResponse } from "next/server";
-
+export const runtime = "edge";
 export async function POST(request: Request) {
   try {
     const { userId, followingId } = await request.json();

@@ -4,3 +4,9 @@ compatibility_date = "2025-03-08"
 compatibility_flags = ["nodejs_compat"]
 
 pages_build_output_dir = ".vercel/output/static"
+
+[[d1_databases]]
+binding = "DATABASE"
+database_name = "birdex-db"
+database_id = "762606a1-c399-4254-8d43-caa4321366be"
+migrations_dir = "./src/database/drizzle"

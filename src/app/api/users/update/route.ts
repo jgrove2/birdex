@@ -1,6 +1,6 @@
 import { updateUserDetails } from "@/lib/queries/users";
 import { NextResponse } from "next/server";
-
+export const runtime = "edge";
 export async function POST(request: Request) {
   try {
     const { userId, userName, profilePicture, blurb } = await request.json();
