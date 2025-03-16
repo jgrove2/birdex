@@ -4,6 +4,8 @@
   align-items: center;
   justify-content: center;
   width: -webkit-fill-available;
+  font-family: var(--font-comfortaa);
+  font-size: 1rem;
   .dialog_list {
     display: flex;
     flex-direction: column;
@@ -12,10 +14,14 @@
     width: -webkit-fill-available;
     padding: 2rem;
     .dialog_row {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
     }
   }
+}
+
+.search_input {
+  font-size: 1rem;
 }
