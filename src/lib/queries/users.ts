@@ -1,6 +1,6 @@
 import { database } from "@/database";
 import { profileTable, followingTable } from "@/database/schema";
-import { eq, ilike, and } from "drizzle-orm";
+import { eq, and, like } from "drizzle-orm";
 
 export const getUserByClerkId = async (userId: string) => {
   const user = await database
@@ -63,6 +63,6 @@ export const getUsersByUserName = async (userName: string, userId: number) => {
         eq(profileTable.id, followingTable.following_id)
       )
     )
-    .where(ilike(profileTable.user_name, `%${userName}%`));
+    .where(like(profileTable.user_name, `%${userName}%`));
   return users;
 };

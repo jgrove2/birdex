@@ -1,0 +1,15 @@
+.flipAnimationEntrance {
+  animation-duration: 1s;
+  animation-name: flipAnimationEntrance;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes flipAnimationEntrance {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(180deg);
+  }
+}

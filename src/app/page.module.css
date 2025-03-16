@@ -47,11 +47,13 @@
     width: 75%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 1.5rem;
-  justify-content: center;
-  justify-items: center;
-  align-items: center;
-  padding-bottom: 10rem;
+    overflow: visible;
+    gap: 1.5rem;
+    padding-top: 1rem;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    padding-bottom: 10rem;
   }
 }
 

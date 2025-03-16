@@ -1,16 +1,28 @@
+"use client";
 import Image from "next/image";
 import testBird from "@/../public/birdSketchCanvas.jpg";
 import styles from "./birdCard.module.css";
-
+import { motion } from "framer-motion";
 type BirdCardProps = {
   birdId: string;
   birdName: string;
   enabled: boolean;
+  onClick: () => void;
 };
 
-export default function BirdCard({ birdId, birdName, enabled }: BirdCardProps) {
+export default function BirdCard({
+  birdId,
+  birdName,
+  enabled,
+  onClick,
+}: BirdCardProps) {
   return (
-    <div className={styles.bird_card}>
+    <motion.button
+      className={styles.bird_card}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      onClick={onClick}
+    >
       <Image
         src={testBird}
         alt="Bird"
@@ -23,6 +35,6 @@ export default function BirdCard({ birdId, birdName, enabled }: BirdCardProps) {
         }
       />
       <div>{enabled ? <span>{birdName}</span> : <span>{birdId}</span>}</div>
-    </div>
+    </motion.button>
   );
 }

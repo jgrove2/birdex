@@ -8,10 +8,12 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { DragHandle } from "@/components/icons/dragHandle";
 import { useUser } from "@clerk/nextjs";
+import BirdModal from "@/components/birdCard/birdModal";
 export default function Home() {
   const { user } = useUser();
   const [scrollState, setScrollState] = useState<"hidden" | "scroll">("hidden");
   const targetRef = useRef<HTMLDivElement>(null);
+  const [birdId, setBirdId] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     function setScrollPosition() {
@@ -57,44 +59,48 @@ export default function Home() {
   }, [targetRef.current]);
 
   return (
-    <motion.div className={styles.home_container} ref={containerRef}>
-      <div className={styles.image_container}>
-        {scrollState === "hidden" && (
-          <h1 className={"welcome_text"}>
-            {user?.firstName ? `Hello, ${user.firstName}` : "Hello"}
-          </h1>
-        )}
-        <Image
-          width={5120}
-          height={2880}
-          src={`${process.env.NEXT_PUBLIC_R2_PUBLIC_URL}/mainHeader-1.webp`}
-          alt="Birdex"
-          className={"banner_image"}
-          priority
-        />
-      </div>
-      <motion.div className={styles.content_container} ref={targetRef}>
-        <div className={styles.drag_handle_container}>
-          <DragHandle />
+    <>
+      <motion.div className={styles.home_container} ref={containerRef}>
+        <div className={styles.image_container}>
+          {scrollState === "hidden" && (
+            <h1 className={"welcome_text"}>
+              {user?.firstName ? `Hello, ${user.firstName}` : "Hello"}
+            </h1>
+          )}
+          <Image
+            width={5120}
+            height={2880}
+            src={`${process.env.NEXT_PUBLIC_R2_PUBLIC_URL}/mainHeader-1.webp`}
+            alt="Birdex"
+            className={"banner_image"}
+            priority
+          />
         </div>
-        <motion.div
-          className={styles.grid_wrapper}
-          style={{
-            overflow: `${scrollState}`,
-          }}
-        >
-          <div className={styles.content_grid}>
-            {Array.from({ length: 10 }).map((_, index) => (
-              <BirdCard
-                key={index}
-                birdId={index.toString()}
-                birdName={`Bird ${index}`}
-                enabled={true}
-              />
-            ))}
+        <motion.div className={styles.content_container} ref={targetRef}>
+          <div className={styles.drag_handle_container}>
+            <DragHandle />
           </div>
+          <motion.div
+            className={styles.grid_wrapper}
+            style={{
+              overflow: `${scrollState}`,
+            }}
+          >
+            <div className={styles.content_grid}>
+              {Array.from({ length: 10 }).map((_, index) => (
+                <BirdCard
+                  key={index}
+                  birdId={index.toString()}
+                  birdName={`Bird ${index}`}
+                  enabled={true}
+                  onClick={() => setBirdId(index.toString())}
+                />
+              ))}
+            </div>
+          </motion.div>
         </motion.div>
       </motion.div>
-    </motion.div>
+      <BirdModal birdId={birdId ?? ""} handleClose={() => setBirdId(null)} />
+    </>
   );
 }

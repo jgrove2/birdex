@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 
 const fetchSearch = async (searchTerm: string, userId: number) => {
+  console.log(searchTerm, userId);
   const response = await fetch(
     `/api/users/search?search=${searchTerm}&userId=${userId}`
   );
