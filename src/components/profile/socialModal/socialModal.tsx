@@ -11,6 +11,7 @@ import { useFollowing } from "@/hooks/useFollowing";
 import { SquareLoader } from "react-spinners";
 import { useSearch } from "@/hooks/useSearch";
 import { useFollowers } from "@/hooks/useFollowers";
+import { ClerkUser } from "@/types/clerk";
 export function FollowingModal({
   userId,
   searchToggle,
@@ -24,7 +25,7 @@ export function FollowingModal({
   const [isPending, startTransition] = useTransition();
 
   const { data: userData, isPending: isUserDataPending } = useUserData(
-    user?.id ?? null
+    user as ClerkUser
   );
   const {
     data: followingData,
@@ -180,7 +181,7 @@ export function FollowersModal({ userId }: { userId: number }) {
   const { user } = useUser();
   const [isPending, startTransition] = useTransition();
   const { data: userData, isPending: isUserDataPending } = useUserData(
-    user?.id ?? null
+    user as ClerkUser
   );
   const {
     data: followersData,

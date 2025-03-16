@@ -12,7 +12,7 @@ import { useUserData } from "@/hooks/useUserData";
 import { useFollowers } from "@/hooks/useFollowers";
 import { useFollowing } from "@/hooks/useFollowing";
 import { useUser } from "@clerk/nextjs";
-
+import { ClerkUser } from "@/types/clerk";
 export default function Profile() {
   const { user, isLoaded } = useUser();
   const router = useRouter();
@@ -21,7 +21,7 @@ export default function Profile() {
     data: userData,
     isPending: userDataPending,
     refetch: refetchUserData,
-  } = useUserData(user?.id);
+  } = useUserData(user as ClerkUser);
 
   const { data: followers, isPending: followersPending } = useFollowers(
     userData?.id
